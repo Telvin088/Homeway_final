@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grogin - Online Grocery Shopping</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'grogin-purple': '#6b46c1',
+                        'grogin-dark-purple': '#5a3aa6',
+                        'grogin-light-purple': '#8b5cf6',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+        body {
+            font-family: "Inter", sans-serif;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        nav {
+            width: 95%;
+        }
+    </style>
+</head>
+
+
+<body class="min-h-screen">
+    <nav class="bg-white shadow">
+        {% if user.is_authenticated %}
+        <!-- Top Banner -->
+        <div class="bg-grogin-purple text-white text-sm py-3 flex justify-between items-center"
+            style="font-size: 9px; display: flex; justify-content: space-around;">
+            <div class="font-bold">FREE delivery & 40% Discount for next 3 orders! Place
+                your 1st order in.</div>
+            <div class="flex items-center gap-2" style="font-size: 9px;">
+                Until the end of the sale:
+                <span id="hours" class="" style="font-size: 13px; font-weight: bold;">84</span> hours
+                <span id="days" class="" style="font-size: 13px; font-weight: bold;">13</span> days
+                <span id="minutes" class="" style="font-size: 13px; font-weight: bold;">52</span> minutes
+                <span id="seconds" class="" style="font-size: 13px; font-weight: bold;">12</span> sec
+            </div>
+        </div>
+
+        <!-- Secondary Navigation -->
+        <div class="border-b py-3 text-sm flex justify-between items-center">
+            <div class="flex gap-4">
+                <a href="#" class="hover:text-grogin-purple font-bold" style="font-size: 9px; color: #6b7280;">About
+                    Us</a>
+                <a href="#" class="hover:text-grogin-purple font-bold" style="font-size: 9px; color: #6b7280;">My
+                    account</a>
+                <a href="#" class="hover:text-grogin-purple font-bold"
+                    style="font-size: 9px; color: #6b7280;">Wishlist</a>
+                <span class="border-l px-4" style="font-size: 9px; color: #6b7280;">We
+                    deliver to you every day from
+                    <span class="font-bold" style="color: #ea580c;">7:00 to
+                        23:00</span></span>
+            </div>
+            <div class="flex gap-4 items-center">
+                <div class="flex items-center">
+                    <span class="font-bold" style="font-size: 9px; color: #6b7280;">English</span>
+                    <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                </div>
+                <div class="flex items-center">
+                    <span class="font-bold" style="font-size: 9px; color: #6b7280;">USD</span>
+                    <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                </div>
+                <a href="#" class="hover:text-grogin-purple font-bold" style="font-size: 9px; color: #6b7280;">Order
+                    Tracking</a>
+            </div>
+        </div>
+
+        <!-- Main Navigation -->
+        <div class="py-4 flex justify-between items-center border-b" style="border: 1px solid #fff;">
+            <!-- Logo -->
+            <div class="flex items-center">
+                <div class="mr-4">
+                    <h1 class="text-grogin-purple" style="font-size: 20px; font-weight: bold;">Grogon Logo</h1>
+                </div>
+                <div class="flex items-center text-sm text-gray-600" style="color: #030712; font-size: 8px;">
+                    <i class="fas fa-map-marker-alt mr-1"></i>
+                    <span class="material-symbols-outlined" style="font-size: 16px;">
+                        pin_drop
+                    </span>
+                    <span class="font-bold">Deliver to all</span>
+                </div>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="flex-1 mx-8">
+                <div class="relative">
+                    <input type="text" placeholder="Search for products, categories or brands..."
+                        class="w-full border rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-grogin-purple">
+                    <button class="absolute right-2 top-1/2 transform -translate-y-1/2">
+                        <i class="fas fa-search text-gray-400"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- User Actions -->
+            <div class="flex items-center gap-4">
+                {% if user.is_authenticated %}
+                <div class="flex items-center">
+                    <span style="font-size: 27px; color: #030712;" class="material-symbols-outlined">
+                        person
+                    </span>
+                    <div class="text-xs">
+                        <div>Welcome,</div>
+                        <div class="font-semibold">{{ user.username }}!</div>
+                    </div>
+                </div>
+                {% else %}
+                <div class="flex items-center">
+                    <span style="font-size: 27px; color: #030712;" class="material-symbols-outlined">
+                        person
+                    </span>
+                    <div class="text-xs">
+                        <div>Sign in</div>
+                        <div class="font-semibold">Account</div>
+                    </div>
+                </div>
+                {% endif %}
+                <div class="relative">
+                    <span style="font-size: 23px; color: #030712;" class="material-symbols-outlined">
+                        favorite
+                    </span> <span
+                        class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">7</span>
+                </div>
+                <div class="relative">
+                    <span style="font-size: 23px; color: #030712;" class="material-symbols-outlined">
+                        shopping_cart
+                    </span> <span
+                        class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">2</span>
+                </div>
+            </div>
+        </div>
+        <!-- Categories Navigation -->
+        <div class="flex border-b">
+            <!-- All Categories Dropdown -->
+            <div class="border-t border-r border-l rounded-lg py-3 flex justify-between items-center cursor-pointer"
+                style="width: 180px;">
+                <span class="font-semibold" style="font-size: 15px; color: #030712;">All
+                    Categories</span>
+                <span class="material-symbols-outlined ml-7 mr-2" style="font-size: 21px;">
+                    keyboard_arrow_down
+                </span>
+            </div>
+
+            <!-- Main Menu -->
+            <div class="flex">
+                <a href="#" class="py-3 px-4 hover:text-grogin-purple flex items-center font-medium">
+                    Home
+                    <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                </a>
+                <a href="#" class="py-3 px-4 hover:text-grogin-purple flex items-center font-medium">
+                    Shop
+                    <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                </a>
+                <a href="#" class="py-3 px-4 hover:text-grogin-purple font-medium">Fruits &
+                    Vegetables</a>
+                <a href="#" class="py-3 px-4 hover:text-grogin-purple font-medium">Beverages</a>
+                <a href="#" class="py-3 px-4 hover:text-grogin-purple font-medium">Blog</a>
+                <a href="#" class="py-3 px-4 hover:text-grogin-purple font-medium">Contact</a>
+            </div>
+
+            <!-- Trending Products -->
+            <div class="ml-auto flex">
+                <div class="py-3 px-4 flex items-center">
+                    <span class="font-medium">Trending Products</span>
+                    <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                </div>
+                <div class="py-3 px-4 flex items-center">
+                    <span class="font-medium text-red-500">Almost Finished</span>
+                    <span class="bg-red-500 text-white text-xs px-1 rounded ml-1">NEW</span>
+                    <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </nav>
+    <main class="container mx-auto px-4">
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+
+</html>

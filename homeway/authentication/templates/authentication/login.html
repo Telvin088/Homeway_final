@@ -1,0 +1,21 @@
+{% extends "authentication/base.html" %}
+{% block title %}Login{% endblock %}
+{% block content %}
+<div class="flex flex-col items-center">
+    <h2 class="text-3xl font-extrabold mb-6 text-gray-800">Welcome Back</h2>
+    <form method="post" class="w-full space-y-6">
+        {% csrf_token %}
+        <div class="space-y-4">
+            {{ form.as_p }}
+        </div>
+        <button type="submit"
+            class="w-full bg-blue-600 hover:bg-blue-700 transition text-white py-3 rounded-lg font-semibold shadow">
+            Login
+        </button>
+    </form>
+    <p class="mt-6 text-center text-gray-600">
+        Don't have an account?
+        <a href="{% url 'signup' %}" class="text-blue-600 hover:underline font-medium">Sign up</a>
+    </p>
+</div>
+{% endblock %}

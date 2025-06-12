@@ -1,0 +1,126 @@
+{% extends "shop/base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<!-- <div class="bg-white rounded shadow p-8 mt-8 text-center">
+    <h2 class="text-3xl font-extrabold mb-4 text-gray-800">Welcome, {{ username }}!</h2>
+    <p class="text-lg text-gray-600 mb-2">Your user ID is: <span class="font-mono">{{ user_id }}</span></p>
+    <p class="text-gray-500">Enjoy shopping with us!</p>
+</div> -->
+
+<!-- Main Content -->
+<div class="flex border" style="width: 1300px; margin-left: -22px;">
+    <!-- Sidebar Categories -->
+    <div class="border-r" style="width: 180px;">
+
+        {% if categories %}
+        {% for category in categories %}
+        <div class="py-3 border-b flex items-center justify-between hover:bg-gray-50 cursor-pointer">
+            <!-- <span style="font-size: 17px; font-variation-settings: 'wght' 400;" class="material-symbols-outlined">
+                nutrition
+            </span> -->
+            <span style="font-size: 10px; color: #030712;" class="font-normal">
+                {{ category.name }}
+            </span>
+            <span class="material-symbols-outlined mr-2" style="font-size: 15px; font-variation-settings: 'wght' 400;">
+                chevron_right
+            </span>
+        </div>
+
+        {% endfor %}
+        {% else %}
+        <p class="text-sm text-gray-500">No categories available.</p>
+        {% endif %}
+
+    </div>
+
+    <!-- Main Banner -->
+    <div class="flex-1 p-4">
+        <div class="bg-gray-100 rounded-lg overflow-hidden relative">
+            <div class="absolute top-4 left-4">
+                <span class="bg-green-500 text-white text-xs px-2 py-1 rounded">Weekend Discount</span>
+            </div>
+            <div class="flex">
+                <div class="p-8 w-1/2">
+                    <h2 class="text-3xl font-bold text-purple-900 mb-2">Get the best quality products at the lowest
+                        prices</h2>
+                    <p class="text-gray-700 mb-6">We have prepared special discounts for you on grocery products.
+                        Don't miss these opportunities...</p>
+                    <div class="flex items-center gap-4">
+                        <button
+                            class="bg-grogin-purple hover:bg-grogin-dark-purple text-white px-4 py-2 rounded flex items-center">
+                            Shop Now
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                        <div>
+                            <span class="text-red-500 text-2xl font-bold">$27.89</span>
+                            <span class="text-gray-500 line-through ml-2">$56.87</span>
+                            <div class="text-xs text-gray-500">Don't miss the special deal offer</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-1/2">
+                    <img src="/placeholder.svg?height=300&width=500" alt="Grocery Products"
+                        class="h-full w-full object-cover">
+                </div>
+            </div>
+            <!-- Pagination Dots -->
+            <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-1">
+                <span class="w-2 h-2 bg-grogin-purple rounded-full"></span>
+                <span class="w-2 h-2 bg-gray-300 rounded-full"></span>
+                <span class="w-2 h-2 bg-gray-300 rounded-full"></span>
+                <span class="w-2 h-2 bg-gray-300 rounded-full"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Countdown Timer
+    function updateCountdown() {
+        const hours = document.getElementById('hours');
+        const days = document.getElementById('days');
+        const minutes = document.getElementById('minutes');
+        const seconds = document.getElementById('seconds');
+
+        let secondsValue = parseInt(seconds.textContent);
+        let minutesValue = parseInt(minutes.textContent);
+        let hoursValue = parseInt(hours.textContent);
+        let daysValue = parseInt(days.textContent);
+
+        secondsValue--;
+
+        if (secondsValue < 0) {
+            secondsValue = 59;
+            minutesValue--;
+
+            if (minutesValue < 0) {
+                minutesValue = 59;
+                hoursValue--;
+
+                if (hoursValue < 0) {
+                    hoursValue = 23;
+                    daysValue--;
+
+                    if (daysValue < 0) {
+                        // Sale ended
+                        daysValue = 0;
+                        hoursValue = 0;
+                        minutesValue = 0;
+                        secondsValue = 0;
+                    }
+                }
+            }
+        }
+
+        seconds.textContent = secondsValue < 10 ? '0' + secondsValue : secondsValue;
+        minutes.textContent = minutesValue < 10 ? '0' + minutesValue : minutesValue;
+        hours.textContent = hoursValue < 10 ? '0' + hoursValue : hoursValue;
+        days.textContent = daysValue;
+    }
+
+    // Update countdown every second
+    setInterval(updateCountdown, 1000);
+</script>
+
+
+{% endblock %}
