@@ -19,6 +19,8 @@ LOGIN_REDIRECT_URL = '/shop/home/'  # Or use a named URL like 'shop:home' if usi
 
 ALLOWED_HOSTS = ['a389c4d3-890e-480c-95bd-80a1a8c228f4-00-3h54b13s1mtc7.worf.replit.dev', '0.0.0.0']
 
+CSRF_TRUSTED_ORIGINS = ['https://a389c4d3-890e-480c-95bd-80a1a8c228f4-00-3h54b13s1mtc7.worf.replit.dev']
+
 AUTH_USER_MODEL = 'authentication.CustomUser'
 
 # Application definition
