@@ -10,11 +10,11 @@
 <!-- Main Content -->
 <div class="flex border" style="width: 1300px; margin-left: -22px;">
     <!-- Sidebar Categories -->
-    <div class="border-r" style="width: 180px;">
+    <div class="border-r relative" style="width: 180px;">
 
         {% if categories %}
         {% for category in categories %}
-        <div class="py-3 border-b flex items-center justify-between hover:bg-gray-50 cursor-pointer">
+        <div class="py-3 border-b flex items-center justify-between hover:bg-gray-50 cursor-pointer category-item relative" data-category-id="{{ category.id }}">
             <!-- <span style="font-size: 17px; font-variation-settings: 'wght' 400;" class="material-symbols-outlined">
                 nutrition
             </span> -->
@@ -24,6 +24,20 @@
             <span class="material-symbols-outlined mr-2" style="font-size: 15px; font-variation-settings: 'wght' 400;">
                 chevron_right
             </span>
+            
+            <!-- Subcategories Popup -->
+            {% if category.subcategories.all %}
+            <div class="subcategories-popup absolute left-full top-0 bg-white border border-gray-200 rounded-lg shadow-lg z-10 min-w-48 opacity-0 invisible transition-all duration-200 ease-in-out transform translate-x-2">
+                <div class="p-3">
+                    <h4 class="font-semibold text-sm text-gray-800 mb-2 border-b pb-1">{{ category.name }}</h4>
+                    {% for subcategory in category.subcategories.all %}
+                    <div class="py-1 px-2 hover:bg-gray-50 rounded cursor-pointer text-xs text-gray-700 hover:text-grogin-purple transition-colors">
+                        {{ subcategory.name }}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
         </div>
 
         {% endfor %}
@@ -74,6 +88,28 @@
     </div>
 </div>
 
+<style>
+    .category-item:hover .subcategories-popup {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(0);
+    }
+    
+    .subcategories-popup {
+        max-height: 300px;
+        overflow-y: auto;
+    }
+    
+    .subcategories-popup::-webkit-scrollbar {
+        width: 4px;
+    }
+    
+    .subcategories-popup::-webkit-scrollbar-thumb {
+        background-color: #d1d5db;
+        border-radius: 2px;
+    }
+</style>
+
 <script>
     // Countdown Timer
     function updateCountdown() {
@@ -120,6 +156,56 @@
 
     // Update countdown every second
     setInterval(updateCountdown, 1000);
+
+    // Category hover effect
+    document.addEventListener('DOMContentLoaded', function() {
+        const categoryItems = document.querySelectorAll('.category-item');
+        
+        categoryItems.forEach(item => {
+            const popup = item.querySelector('.subcategories-popup');
+            
+            if (popup) {
+                item.addEventListener('mouseenter', function() {
+                    // Hide all other popups first
+                    document.querySelectorAll('.subcategories-popup').forEach(p => {
+                        if (p !== popup) {
+                            p.style.opacity = '0';
+                            p.style.visibility = 'hidden';
+                            p.style.transform = 'translateX(8px)';
+                        }
+                    });
+                    
+                    // Show current popup
+                    popup.style.opacity = '1';
+                    popup.style.visibility = 'visible';
+                    popup.style.transform = 'translateX(0)';
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    setTimeout(() => {
+                        if (!popup.matches(':hover') && !item.matches(':hover')) {
+                            popup.style.opacity = '0';
+                            popup.style.visibility = 'hidden';
+                            popup.style.transform = 'translateX(8px)';
+                        }
+                    }, 100);
+                });
+                
+                // Keep popup visible when hovering over it
+                popup.addEventListener('mouseenter', function() {
+                    popup.style.opacity = '1';
+                    popup.style.visibility = 'visible';
+                    popup.style.transform = 'translateX(0)';
+                });
+                
+                popup.addEventListener('mouseleave', function() {
+                    popup.style.opacity = '0';
+                    popup.style.visibility = 'hidden';
+                    popup.style.transform = 'translateX(8px)';
+                });
+            }
+        });
+    });
 </script>
 
 

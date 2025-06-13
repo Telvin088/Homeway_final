@@ -3,7 +3,7 @@ from .models import Category  # Import Category model
 
 def home(request):
     user = request.user
-    categories = Category.objects.all()  # Fetch all categories
+    categories = Category.objects.prefetch_related('subcategories').all()  # Fetch categories with subcategories
 
     context = {
         'user_id': user.id,
