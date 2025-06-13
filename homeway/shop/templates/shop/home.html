@@ -21,9 +21,11 @@
             <span style="font-size: 10px; color: #030712;" class="font-normal">
                 {{ category.name }}
             </span>
+            {% if category.subcategories.all %}
             <span class="material-symbols-outlined mr-2" style="font-size: 15px; font-variation-settings: 'wght' 400;">
                 chevron_right
             </span>
+            {% endif %}
             
             <!-- Subcategories Popup -->
             {% if category.subcategories.all %}
