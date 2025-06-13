@@ -25,7 +25,6 @@ ALLOWED_HOSTS = [
     "0.0.0.0"
 ]
 
-
 AUTH_USER_MODEL = 'authentication.CustomUser'
 
 # Application definition
