@@ -6,9 +6,30 @@
     <p class="text-lg text-gray-600 mb-2">Your user ID is: <span class="font-mono">{{ user_id }}</span></p>
     <p class="text-gray-500">Enjoy shopping with us!</p>
 </div> -->
+<style>
+    .category-item:hover .subcategories-popup {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(0);
+    }
+
+    .subcategories-popup {
+        max-height: 300px;
+        overflow-y: auto;
+    }
+
+    .subcategories-popup::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    .subcategories-popup::-webkit-scrollbar-thumb {
+        background-color: #d1d5db;
+        border-radius: 2px;
+    }
+</style>
 
 <!-- Main Content -->
-<div class="flex border" style="width: 1300px; margin-left: -22px;">
+<div class="flex" style="width: 1295px; margin-left: -13px;">
     <!-- Sidebar Categories -->
     <div class="border-r relative" style="width: 180px;">
 
@@ -223,27 +244,7 @@
     </div>
 </div>
 
-<style>
-    .category-item:hover .subcategories-popup {
-        opacity: 1;
-        visibility: visible;
-        transform: translateX(0);
-    }
-    
-    .subcategories-popup {
-        max-height: 300px;
-        overflow-y: auto;
-    }
-    
-    .subcategories-popup::-webkit-scrollbar {
-        width: 4px;
-    }
-    
-    .subcategories-popup::-webkit-scrollbar-thumb {
-        background-color: #d1d5db;
-        border-radius: 2px;
-    }
-</style>
+
 
 <script>
     // Countdown Timer
