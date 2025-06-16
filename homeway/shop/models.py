@@ -33,7 +33,9 @@ class Product(models.Model):
     def discounted_price(self):
         if self.price is None or self.discount_percentage is None:
             return None
-        return round(self.price * (1 - self.discount_percentage / 100), 2)
+        from decimal import Decimal
+        discount_factor = Decimal('1') - (Decimal(str(self.discount_percentage)) / Decimal('100'))
+        return round(self.price * discount_factor, 2)
     discounted_price.short_description = "Discounted Price"
 
 
