@@ -414,9 +414,10 @@
         </div>
 
         <!-- Products Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-6 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4" style="height: 200px;">
             {% for product in featured_products %}
-            <div class="bg-white border rounded-lg p-4 relative group hover:shadow-lg transition-shadow">
+                <div class="bg-white border rounded-lg p-4 relative group hover:shadow-lg transition-shadow flex items-center">
+
                 {% if product.discount_percentage > 0 %}
                 <div class="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded">
                     {{ product.discount_percentage }}%
@@ -427,36 +428,97 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
                     </svg>
                 </button>
-                <div class="mb-3">
+                <div class="w-1/2 mb-3 mr-4">
                     <img src="{{ product.image.url }}" alt="{{ product.name }}" class="w-full h-32 object-cover rounded">
                 </div>
-                <h3 class="font-medium text-sm text-gray-900 mb-1">{{ product.name|truncatechars:50 }}</h3>
-                <div class="flex items-center mb-2">
-                    <div class="flex text-yellow-400">
-                        {% for i in "12345"|make_list %}
-                            {% if forloop.counter <= product.ratings %}
-                                <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                <div class="w-1/2">
+                    <h3 class="font-medium text-sm text-gray-900 mb-1">{{ product.name|truncatechars:50 }}</h3>
+                    <div class="flex items-center mb-2">
+                        <div class="flex text-yellow-400">
+                            {% for i in "12345"|make_list %}
+                                {% if forloop.counter <= product.ratings %}
+                                    <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <span class="text-xs text-gray-500 ml-1">({{ product.reviews.count }})</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div>
+                            {% if product.discount_percentage > 0 %}
+                                <span class="text-red-500 font-bold">KSh {{ product.discounted_price }}</span>
+                                <span class="text-gray-400 line-through text-sm ml-1">${{ product.price }}</span>
+                            {% else %}
+                                <span class="text-gray-900 font-bold">${{ product.price }}</span>
                             {% endif %}
-                        {% endfor %}
+                        </div>
                     </div>
-                    <span class="text-xs text-gray-500 ml-1">({{ product.reviews.count }})</span>
-                </div>
-                <div class="flex items-center justify-between">
-                    <div>
-                        {% if product.discount_percentage > 0 %}
-                            <span class="text-red-500 font-bold">${{ product.discounted_price }}</span>
-                            <span class="text-gray-400 line-through text-sm ml-1">${{ product.price }}</span>
-                        {% else %}
-                            <span class="text-gray-900 font-bold">${{ product.price }}</span>
-                        {% endif %}
+                    <div id="countdown-{{product.id}}" class="text-xs text-gray-500 mt-2">
+                        Loading...
                     </div>
+                    <button class="w-full mt-3 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm py-2 rounded transition-colors">
+                        Add to cart
+                    </button>
                 </div>
-                <button class="w-full mt-3 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm py-2 rounded transition-colors">
-                    Add to cart
-                </button>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        function getTimeRemaining(endtime) {
+                            let total = Date.parse(endtime) - Date.parse(new Date());
+                            let seconds = Math.floor((total / 1000) % 60);
+                            let minutes = Math.floor((total / (1000 * 60)) % 60);
+                            let hours = Math.floor((total / (1000 * 60 * 60)) % 24);
+                            let days = Math.floor(total / (1000 * 60 * 60 * 24));
+                            return {
+                                total: total,
+                                days: days,
+                                hours: hours,
+                                minutes: minutes,
+                                seconds: seconds
+                            };
+                        }
+                        function initializeClock(id, endtime) {
+                            let clock = document.getElementById(id);
+                            if (!clock) {
+                                console.error('Clock element with id ' + id + ' not found');
+                                return;
+                            }
+                            function updateClock() {
+                                let t = getTimeRemaining(endtime);
+                                if (t.total <= 0) {
+                                    clearInterval(timeinterval);
+                                    clock.innerHTML = 'EXPIRED';
+                                } else {
+                                    clock.innerHTML = 'Days: ' + t.days + '<br>' +
+                                        'Hours: '+ ('0' + t.hours).slice(-2) + '<br>' +
+                                        'Minutes: ' + ('0' + t.minutes).slice(-2) + '<br>' +
+                                        'Seconds: ' + ('0' + t.seconds).slice(-2);
+                                }
+                            }
+                            updateClock(); // Run clock once at first
+                            let timeinterval = setInterval(updateClock, 1000);
+                        }
+                        // Function to generate a unique end date, persisting across reloads
+                        function getProductEndDate(productId) {
+                            const localStorageKey = `productEndDate-${productId}`;
+                            let storedEndDate = localStorage.getItem(localStorageKey);
+                            if (storedEndDate) {
+                                return new Date(storedEndDate);
+                            } else {
+                                // Generate a new end date (e.g., 7 days from now)
+                                let endDate = new Date();
+                                endDate.setDate(endDate.getDate() + 7);
+                                localStorage.setItem(localStorageKey, endDate.toISOString());
+                                return endDate;
+                            }
+                        }
+                        let productId = "{{product.id}}";
+                        let endDate = getProductEndDate(productId);
+                        initializeClock('countdown-' + productId, endDate);
+                    });
+                </script>
             </div>
             {% empty %}
-            <div class="col-span-6 text-center text-gray-500 py-8">
+            <div class="col-span-3 text-center text-gray-500 py-8">
                 No featured products available at the moment.
             </div>
             {% endfor %}
