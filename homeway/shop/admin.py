@@ -7,8 +7,8 @@ class ReviewInline(admin.TabularInline):
     extra = 1  # How many empty review forms to show
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'category', 'subcategory', 'price', 'discount_percentage', 'ratings', 'products_remaining')
-    list_filter = ('category', 'subcategory', 'discount_percentage')
+    list_display = ('name', 'category', 'subcategory', 'price', 'discount_percentage', 'ratings', 'products_remaining', 'section')
+    list_filter = ('category', 'subcategory', 'discount_percentage', 'section')
     search_fields = ('name', 'description')
     
     # Show Reviews inline inside Product admin page

@@ -13,6 +13,12 @@ class SubCategory(models.Model):
         return f"{self.category.name} - {self.name}"
 
 class Product(models.Model):
+    SECTION_CHOICES = [
+        ('new_arrivals', 'New Arrivals'),
+        ('featured', 'Featured Products'),
+        ('best_sellers', 'Best Sellers'),
+    ]
+    
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     subcategory = models.ForeignKey(SubCategory, on_delete=models.CASCADE, null=True, blank=True)
     name = models.CharField(max_length=200)
@@ -22,6 +28,7 @@ class Product(models.Model):
     ratings = models.FloatField(default=0)
     discount_percentage = models.PositiveIntegerField(default=0)
     products_remaining = models.PositiveIntegerField(default=0)
+    section = models.CharField(max_length=20, choices=SECTION_CHOICES, default='new_arrivals')
 
     def discounted_price(self):
         if self.price is None or self.discount_percentage is None:
