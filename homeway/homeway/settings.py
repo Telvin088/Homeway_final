@@ -17,12 +17,14 @@ LOGIN_REDIRECT_URL = '/shop/home/'  # Or use a named URL like 'shop:home' if usi
 
 CSRF_TRUSTED_ORIGINS = [
     "https://a389c4d3-890e-480c-95bd-80a1a8c228f4-00-3h54b13s1mtc7.worf.replit.dev",
-    "https://a389c4d3-890e-480c-95bd-80a1a8c228f4-00-3h54b13s1mtc7.worf.replit.dev:5000"
+    "https://a389c4d3-890e-480c-95bd-80a1a8c228f4-00-3h54b13s1mtc7.worf.replit.dev:5000",
+    "http://127.0.0.1:8000",
 ]
 
 ALLOWED_HOSTS = [
     "a389c4d3-890e-480c-95bd-80a1a8c228f4-00-3h54b13s1mtc7.worf.replit.dev",
-    "0.0.0.0"
+    "0.0.0.0",
+    "127.0.0.1"
 ]
 
 AUTH_USER_MODEL = 'authentication.CustomUser'
