@@ -29,12 +29,11 @@
             width: 100%;
             display: flex;
             flex-direction: column;
-            align-items: center;
             overflow-x: hidden;
         }
 
         nav {
-            width: 95%;
+            width: 100%;
         }
     </style>
 </head>
@@ -58,7 +57,7 @@
         </div>
 
         <!-- Secondary Navigation -->
-        <div class="border-b py-3 text-sm flex justify-between items-center">
+        <div class="border-b py-3 text-sm flex justify-between items-center" style="padding-left: 5%; padding-right: 5%;">
             <div class="flex gap-4">
                 <a href="#" class="hover:text-grogin-purple font-bold" style="font-size: 9px; color: #6b7280;">About
                     Us</a>
@@ -86,7 +85,7 @@
         </div>
 
         <!-- Main Navigation -->
-        <div class="py-4 flex justify-between items-center border-b" style="border: 1px solid #fff;">
+        <div class="py-4 flex justify-between items-center border-b" style="border: 1px solid #fff; padding-left: 5%; padding-right: 5%;">
             <!-- Logo -->
             <div class="flex items-center">
                 <div class="mr-4">
@@ -150,13 +149,11 @@
             </div>
         </div>
         <!-- Categories Navigation -->
-        <div class="flex border-b">
+        <div class="flex border-b" style="padding-left: 5%; padding-right: 5%;">
             <!-- All Categories Dropdown -->
-            <div class="border-t border-r border-l rounded-lg py-3 flex justify-between items-center cursor-pointer"
-                style="width: 180px;">
-                <span class="font-semibold" style="font-size: 15px; color: #030712;">All
-                    Categories</span>
-                <span class="material-symbols-outlined ml-7 mr-2" style="font-size: 21px;">
+            <div id="all-categories-button" class="border-t border-r border-l rounded-t-xl bg-white shadow-sm flex items-center justify-between cursor-pointer px-4 py-3 gap-2" style="width: 200px;">
+                <span class="font-semibold text-base" style="color: #030712;">All Categories</span>
+                <span class="material-symbols-outlined ml-4" style="font-size: 21px;">
                     keyboard_arrow_down
                 </span>
             </div>
@@ -193,7 +190,7 @@
         </div>
         {% endif %}
     </nav>
-    <main class="container mx-auto px-4">
+    <main class="w-full" style="padding-left: 5%; padding-right: 5%;">
         {% block content %}
         {% endblock %}
     </main>

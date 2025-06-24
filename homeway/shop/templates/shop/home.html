@@ -46,13 +46,13 @@
 </style>
 
 <!-- Main Home Content -->
-<div class="flex" style="width: 1295px; margin-left: -13px;">
+<div class="flex">
     <!-- Sidebar Categories -->
-    <div class="border-r relative" style="width: 180px;">
+    <div id="category-sidebar" class="border rounded-lg relative transition-all duration-300 px-4 py-4" style="width: 180px;">
 
         {% if categories %}
         {% for category in categories %}
-        <div class="py-3 border-b flex items-center justify-between hover:bg-gray-50 cursor-pointer category-item relative"
+        <div class="py-2 px-2 border-b flex items-center justify-between hover:bg-gray-50 cursor-pointer category-item relative rounded-md"
             data-category-id="{{ category.id }}">
             <!-- <span style="font-size: 17px; font-variation-settings: 'wght' 400;" class="material-symbols-outlined">
                 nutrition
@@ -91,15 +91,14 @@
     </div>
 
     <!-- Main Banner Slider -->
-    <div class="flex-1 p-4">
+    <div id="main-content" class="flex-1 p-4 transition-all duration-300">
         <div class="starter-template bg-gray-100 rounded-lg overflow-hidden relative" style="height: 363px;">
             <!-- Slides Container -->
             <div class="slides-container relative w-full h-full">
                 <!-- Slide 1 -->
                 <div class="slide active absolute inset-0 p-5 transition-opacity duration-500">
                     <div class="absolute top-4 left-4 px-8 py-2">
-                        <span class="bg-green-500 text-white text-xs px-2 py-2 rounded font-bold"
-                            style="font-size: 9px; color: #166534;">Weekend Discount</span>
+                        <span class="bg-gradient-to-r from-green-400 to-white text-green-900 text-sm px-4 py-1 rounded-full font-bold shadow-sm">Weekend Discount</span>
                     </div>
                     <div class="flex h-full">
                         <div class="p-8 w-1/2">
@@ -128,8 +127,7 @@
                 <!-- Slide 2 -->
                 <div class="slide absolute inset-0 p-5 transition-opacity duration-500 opacity-0">
                     <div class="absolute top-4 left-4 px-8 py-2">
-                        <span class="bg-red-500 text-white text-xs px-2 py-2 rounded font-bold"
-                            style="font-size: 9px; color: #ffffff;">Flash Sale</span>
+                        <span class="bg-gradient-to-r from-red-400 to-white text-red-900 text-sm px-4 py-1 rounded-full font-bold shadow-sm">Flash Sale</span>
                     </div>
                     <div class="flex h-full">
                         <div class="p-8 w-1/2">
@@ -158,8 +156,7 @@
                 <!-- Slide 3 -->
                 <div class="slide absolute inset-0 p-5 transition-opacity duration-500 opacity-0">
                     <div class="absolute top-4 left-4 px-8 py-2">
-                        <span class="bg-blue-500 text-white text-xs px-2 py-2 rounded font-bold"
-                            style="font-size: 9px; color: #ffffff;">New Arrival</span>
+                        <span class="bg-gradient-to-r from-blue-400 to-white text-blue-900 text-sm px-4 py-1 rounded-full font-bold shadow-sm">New Arrival</span>
                     </div>
                     <div class="flex h-full">
                         <div class="p-8 w-1/2">
@@ -188,8 +185,7 @@
                 <!-- Slide 4 -->
                 <div class="slide absolute inset-0 p-5 transition-opacity duration-500 opacity-0">
                     <div class="absolute top-4 left-4 px-8 py-2">
-                        <span class="bg-yellow-500 text-white text-xs px-2 py-2 rounded font-bold"
-                            style="font-size: 9px; color: #ffffff;">Limited Time</span>
+                        <span class="bg-gradient-to-r from-yellow-300 to-white text-yellow-900 text-sm px-4 py-1 rounded-full font-bold shadow-sm">Limited Time</span>
                     </div>
                     <div class="flex h-full">
                         <div class="p-8 w-1/2">
@@ -234,7 +230,7 @@
 </div>
 
 <!-- Features Section -->
-<div class="mt-8" style="width: 1300px; margin-left: -22px;">
+<div class="mt-8">
     <div class="bg-white rounded-lg shadow-sm p-6">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <!-- Payment only online -->
@@ -311,7 +307,7 @@
 </div>
 
 <!-- Promotional Cards Section -->
-<div class="mt-8" style="width: 1300px; margin-left: -22px;">
+<div class="mt-8">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <!-- Quality eggs card -->
         <div class="bg-orange-50 rounded-2xl p-6 relative overflow-hidden" style="height: 200px;">
@@ -407,7 +403,7 @@
     </div>
 
     <!-- New Arrivals Section -->
-    <div class="mt-8" style="width: 1300px; margin-left: -22px;">
+    <div class="mt-8">
         <div class="bg-white rounded-lg p-6">
             <!-- Section Header -->
             <div class="flex justify-between items-center mb-6">
@@ -484,7 +480,7 @@
     </div>
 
     <!-- Featured Products Section -->
-    <div class="mt-8" style="width: 1300px; margin-left: -22px;">
+    <div class="mt-8">
         <div class="bg-white rounded-lg p-6">
             <!-- Section Header -->
             <div class="flex justify-between items-center mb-6">
@@ -650,7 +646,7 @@
     </div>
 
     <!-- Best Sellers Section -->
-    <div class="mt-8" style="width: 1300px; margin-left: -22px;">
+    <div class="mt-8">
         <div class="bg-white rounded-lg p-6">
             <!-- Section Header -->
             <div class="flex justify-between items-center mb-6">
@@ -749,7 +745,7 @@
         </div>
     </div>
     <!-- Best Sellers Section -->
-    <div class="mt-8" style="width: 1300px; margin-left: -22px;">
+    <div class="mt-8">
         <div class="bg-white rounded-lg p-6">
             <!-- Section Header -->
             <div class="flex justify-between items-center mb-6">
@@ -917,6 +913,25 @@
                 });
             }
         });
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const categoriesButton = document.getElementById('all-categories-button');
+        const categorySidebar = document.getElementById('category-sidebar');
+        const mainContent = document.getElementById('main-content');
+
+        if (categoriesButton && categorySidebar && mainContent) {
+            categoriesButton.addEventListener('click', function() {
+                // Toggle visibility of the sidebar
+                if (categorySidebar.style.width === '0px') {
+                    categorySidebar.style.width = '180px';
+                    categorySidebar.style.opacity = '1';
+                } else {
+                    categorySidebar.style.width = '0px';
+                    categorySidebar.style.opacity = '0';
+                }
+            });
+        }
     });
 </script>
 
