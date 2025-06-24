@@ -30,6 +30,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            overflow-x: hidden;
         }
 
         nav {
@@ -43,8 +44,8 @@
     <nav class="bg-white shadow">
         {% if user.is_authenticated %}
         <!-- Top Banner -->
-        <div class="bg-grogin-purple text-white text-sm py-3 flex justify-between items-center"
-            style="font-size: 9px; display: flex; justify-content: space-around;">
+        <div class="w-screen left-0 right-0 bg-grogin-purple text-white text-sm py-3 flex justify-between items-center fixed top-0 z-50"
+            style="font-size: 9px; display: flex; justify-content: space-around; margin-left:0; margin-right:0;">
             <div class="font-bold">FREE delivery & 40% Discount for next 3 orders! Place
                 your 1st order in.</div>
             <div class="flex items-center gap-2" style="font-size: 9px;">
