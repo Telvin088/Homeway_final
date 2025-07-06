@@ -86,11 +86,11 @@
         
         <!-- Show More Button -->
         {% if categories.count > 9 %}
-        <div id="show-more-btn" class="py-2 px-2 flex items-center justify-center hover:bg-gray-50 cursor-pointer rounded-md border-t mt-2">
-            <span style="font-size: 10px; color: #634c9f;" class="font-medium">
+        <div id="show-more-btn" class="py-2 px-2 border-b flex items-center justify-between hover:bg-gray-50 cursor-pointer rounded-md font-normal hover:text-grogin-purple transition-colors">
+            <span style="font-size: 10px; color: #030712;" class="font-normal">
                 Show More
             </span>
-            <span class="material-symbols-outlined ml-2" style="font-size: 15px; color: #634c9f;">
+            <span class="material-symbols-outlined mr-2" style="font-size: 15px; font-variation-settings: 'wght' 400;">
                 expand_more
             </span>
         </div>
@@ -105,16 +105,16 @@
     <!-- Categories Popup Modal -->
     <div id="categories-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
         <div class="flex items-center justify-center min-h-screen p-4">
-            <div class="bg-white border border-gray-200 rounded-lg shadow-lg max-w-sm w-full max-h-80 overflow-y-auto">
+            <div class="bg-white border border-gray-200 rounded-lg shadow-lg min-w-48 w-auto max-h-80 overflow-y-auto">
                 <div class="p-2">
-                    <div class="flex justify-between items-center mb-2 px-2 py-1">
-                        <button id="close-modal" class="text-gray-400 hover:text-gray-600 ml-auto">
-                            <span class="material-symbols-outlined" style="font-size: 18px;">close</span>
+                    <div class="flex justify-end mb-1">
+                        <button id="close-modal" class="text-gray-400 hover:text-gray-600">
+                            <span class="material-symbols-outlined" style="font-size: 15px;">close</span>
                         </button>
                     </div>
                     {% if categories %}
                     {% for category in categories %}
-                    <div class="py-2 px-2 border-b last:border-b-0 flex items-center justify-between hover:bg-gray-50 cursor-pointer rounded-md font-normal hover:text-grogin-purple transition-colors"
+                    <div class="py-2 px-2 hover:bg-gray-50 rounded-md cursor-pointer font-normal hover:text-grogin-purple transition-colors border-b last:border-b-0 flex items-center justify-between"
                         data-category-id="{{ category.id }}">
                         <span style="font-size: 10px; color: #030712;" class="font-normal">
                             {{ category.name }}
