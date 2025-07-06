@@ -51,11 +51,11 @@
 <!-- Main Home Content -->
 <div class="flex">
     <!-- Sidebar Categories -->
-    <div id="category-sidebar" class="border rounded-lg relative transition-all duration-300 px-4 py-4" style="width: 180px;">
+    <div id="category-sidebar" class="border rounded-lg relative transition-all duration-300 px-4 py-4" style="width: 200px; margin-top: -5px; border-top: none;">
 
         {% if categories %}
         {% for category in categories %}
-        <div class="py-2 px-2 border-b flex items-center justify-between hover:bg-gray-50 cursor-pointer category-item relative rounded-md category-item-display {% if forloop.counter > 9 %}hidden{% endif %}"
+        <div class="py-2 border-b flex items-center justify-between hover:bg-gray-50 cursor-pointer category-item relative category-item-display {% if forloop.counter > 9 %}hidden{% endif %}"
             data-category-id="{{ category.id }}">
             <span style="font-size: 10px; color: #030712;" class="font-normal">
                 {{ category.name }}
@@ -959,7 +959,7 @@
             categoriesButton.addEventListener('click', function() {
                 // Toggle visibility of the sidebar
                 if (categorySidebar.style.width === '0px') {
-                    categorySidebar.style.width = '180px';
+                    categorySidebar.style.width = '200px';
                     categorySidebar.style.opacity = '1';
                 } else {
                     categorySidebar.style.width = '0px';
