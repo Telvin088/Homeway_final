@@ -6,5 +6,5 @@ app_name = 'shop'
 
 urlpatterns = [
     path('home/', views.home, name='home'),  # home route in shop app
-    # other shop routes...
+    path('product/<int:pk>/', views.ProductDetailView.as_view(), name='product_detail'),
 ]
