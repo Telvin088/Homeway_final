@@ -25,7 +25,8 @@ CSRF_TRUSTED_ORIGINS = [
 ALLOWED_HOSTS = [
     "a389c4d3-890e-480c-95bd-80a1a8c228f4-00-3h54b13s1mtc7.worf.replit.dev",
     "0.0.0.0",
-    "127.0.0.1"
+    "127.0.0.1",
+    "fb9b6390-cc91-477f-935a-8ec780bc8c91-00-2kxsinpde2hz2.picard.replit.dev",
 ]
 
 AUTH_USER_MODEL = 'authentication.CustomUser'
