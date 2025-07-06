@@ -84,36 +84,21 @@
         </div>
         {% endfor %}
         
-        <!-- Show More Button -->
+        <!-- More Categories Button -->
         {% if categories.count > 9 %}
-        <div id="show-more-btn" class="py-2 px-2 border-b flex items-center justify-between hover:bg-gray-50 cursor-pointer rounded-md font-normal hover:text-grogin-purple transition-colors">
+        <div id="more-categories-btn" class="py-2 px-2 border-b flex items-center justify-between hover:bg-gray-50 cursor-pointer rounded-md font-normal hover:text-grogin-purple transition-colors relative category-item">
             <span style="font-size: 10px; color: #030712;" class="font-normal">
-                Show More
+                More Categories
             </span>
             <span class="material-symbols-outlined mr-2" style="font-size: 15px; font-variation-settings: 'wght' 400;">
-                expand_more
+                chevron_right
             </span>
-        </div>
-        {% endif %}
-        
-        {% else %}
-        <p class="text-sm text-gray-500">No categories available.</p>
-        {% endif %}
 
-    </div>
-
-    <!-- Categories Popup Modal -->
-    <div id="categories-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
-        <div class="flex items-center justify-center min-h-screen p-4">
-            <div class="bg-white border border-gray-200 rounded-lg shadow-lg min-w-48 w-auto max-h-80 overflow-y-auto">
+            <!-- More Categories Popup -->
+            <div class="subcategories-popup absolute left-full top-0 bg-white border border-gray-200 rounded-lg shadow-lg z-10 min-w-48 opacity-0 invisible transition-all duration-200 ease-in-out transform translate-x-4 ml-2">
                 <div class="p-2">
-                    <div class="flex justify-end mb-1">
-                        <button id="close-modal" class="text-gray-400 hover:text-gray-600">
-                            <span class="material-symbols-outlined" style="font-size: 15px;">close</span>
-                        </button>
-                    </div>
-                    {% if categories %}
                     {% for category in categories %}
+                    {% if forloop.counter > 9 %}
                     <div class="py-2 px-2 hover:bg-gray-50 rounded-md cursor-pointer font-normal hover:text-grogin-purple transition-colors border-b last:border-b-0 flex items-center justify-between"
                         data-category-id="{{ category.id }}">
                         <span style="font-size: 10px; color: #030712;" class="font-normal">
@@ -125,12 +110,20 @@
                         </span>
                         {% endif %}
                     </div>
-                    {% endfor %}
                     {% endif %}
+                    {% endfor %}
                 </div>
             </div>
         </div>
+        {% endif %}
+        
+        {% else %}
+        <p class="text-sm text-gray-500">No categories available.</p>
+        {% endif %}
+
     </div>
+
+    
 
     <!-- Main Banner Slider -->
     <div id="main-content" class="flex-1 p-4 transition-all duration-300">
@@ -975,31 +968,7 @@
             });
         }
 
-        // Show More Categories functionality
-        const showMoreBtn = document.getElementById('show-more-btn');
-        const categoriesModal = document.getElementById('categories-modal');
-        const closeModal = document.getElementById('close-modal');
-
-        if (showMoreBtn) {
-            showMoreBtn.addEventListener('click', function() {
-                categoriesModal.classList.remove('hidden');
-            });
-        }
-
-        if (closeModal) {
-            closeModal.addEventListener('click', function() {
-                categoriesModal.classList.add('hidden');
-            });
-        }
-
-        // Close modal when clicking outside
-        if (categoriesModal) {
-            categoriesModal.addEventListener('click', function(e) {
-                if (e.target === categoriesModal) {
-                    categoriesModal.classList.add('hidden');
-                }
-            });
-        }
+        
     });
 </script>
 
