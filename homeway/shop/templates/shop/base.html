@@ -122,9 +122,10 @@
                         <div>Welcome,</div>
                         <div class="font-semibold">{{ user.username }}!</div>
                     </div>
+                    <a href="{% url 'logout' %}" class="ml-2 text-xs text-gray-600 hover:text-grogin-purple">Logout</a>
                 </div>
                 {% else %}
-                <div class="flex items-center">
+                <a href="{% url 'login' %}" class="flex items-center hover:text-grogin-purple">
                     <span style="font-size: 27px; color: #030712;" class="material-symbols-outlined">
                         person
                     </span>
@@ -132,7 +133,7 @@
                         <div>Sign in</div>
                         <div class="font-semibold">Account</div>
                     </div>
-                </div>
+                </a>
                 {% endif %}
                 <div class="relative">
                     <span style="font-size: 23px; color: #030712;" class="material-symbols-outlined">

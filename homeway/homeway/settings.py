@@ -13,7 +13,8 @@ SECRET_KEY = 'django-insecure-$1reua8$oz&l73q2gtt3p(r8o3kq2*l&j$t8%*8py@rm__ou4!
 DEBUG = True
 
 # settings.py
-LOGIN_REDIRECT_URL = '/shop/home/'  # Or use a named URL like 'shop:home' if using named URLs
+LOGIN_REDIRECT_URL = '/shop/home/'
+LOGIN_URL = '/auth/login/'
 
 CSRF_TRUSTED_ORIGINS = [
     "https://a389c4d3-890e-480c-95bd-80a1a8c228f4-00-3h54b13s1mtc7.worf.replit.dev",
