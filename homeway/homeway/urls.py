@@ -8,7 +8,7 @@ def root_redirect(request):
     if request.user.is_authenticated:
         return redirect('shop:home')
     else:
-        return redirect('login')
+        return redirect('authentication:login')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
