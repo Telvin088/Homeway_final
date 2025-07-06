@@ -1,4 +1,4 @@
-run = "python manage.py runserver 0.0.0.0:3000"
+run = "cd homeway && python manage.py runserver 0.0.0.0:5000"
 modules = ["python-3.10", "web", "nodejs-20"]
 
 hidden = [".pythonlibs"]
@@ -11,16 +11,12 @@ packages = ["lsof"]
 language = "python3"
 
 [deployment]
-run = ["sh", "-c", "python manage.py runserver 0.0.0.0:3000"]
+run = ["sh", "-c", "cd homeway && python manage.py runserver 0.0.0.0:5000"]
 deploymentTarget = "gce"
 
 [[ports]]
-localPort = 3000
-externalPort = 80
-
-[[ports]]
 localPort = 5000
-externalPort = 5000
+externalPort = 80
 
 [workflows]
 runButton = "Django Server"
