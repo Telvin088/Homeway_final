@@ -53,11 +53,8 @@
 
         {% if categories %}
         {% for category in categories %}
-        <div class="py-2 px-2 border-b flex items-center justify-between hover:bg-gray-50 cursor-pointer category-item relative rounded-md"
+        <div class="py-2 px-2 border-b flex items-center justify-between hover:bg-gray-50 cursor-pointer category-item relative rounded-md category-item-display {% if forloop.counter > 9 %}hidden{% endif %}"
             data-category-id="{{ category.id }}">
-            <!-- <span style="font-size: 17px; font-variation-settings: 'wght' 400;" class="material-symbols-outlined">
-                nutrition
-            </span> -->
             <span style="font-size: 10px; color: #030712;" class="font-normal">
                 {{ category.name }}
             </span>
@@ -83,12 +80,57 @@
             </div>
             {% endif %}
         </div>
-
         {% endfor %}
+        
+        <!-- Show More Button -->
+        {% if categories.count > 9 %}
+        <div id="show-more-btn" class="py-2 px-2 flex items-center justify-center hover:bg-gray-50 cursor-pointer rounded-md border-t mt-2">
+            <span style="font-size: 10px; color: #634c9f;" class="font-medium">
+                Show More
+            </span>
+            <span class="material-symbols-outlined ml-2" style="font-size: 15px; color: #634c9f;">
+                expand_more
+            </span>
+        </div>
+        {% endif %}
+        
         {% else %}
         <p class="text-sm text-gray-500">No categories available.</p>
         {% endif %}
 
+    </div>
+
+    <!-- Categories Popup Modal -->
+    <div id="categories-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-lg shadow-lg max-w-md w-full max-h-96 overflow-y-auto">
+                <div class="p-4 border-b">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-lg font-semibold text-gray-900">All Categories</h3>
+                        <button id="close-modal" class="text-gray-400 hover:text-gray-600">
+                            <span class="material-symbols-outlined">close</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="p-4">
+                    {% if categories %}
+                    {% for category in categories %}
+                    <div class="py-2 px-2 border-b flex items-center justify-between hover:bg-gray-50 cursor-pointer rounded-md"
+                        data-category-id="{{ category.id }}">
+                        <span style="font-size: 12px; color: #030712;" class="font-normal">
+                            {{ category.name }}
+                        </span>
+                        {% if category.subcategories.all %}
+                        <span class="material-symbols-outlined mr-2" style="font-size: 15px; font-variation-settings: 'wght' 400;">
+                            chevron_right
+                        </span>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Main Banner Slider -->
@@ -930,6 +972,32 @@
                 } else {
                     categorySidebar.style.width = '0px';
                     categorySidebar.style.opacity = '0';
+                }
+            });
+        }
+
+        // Show More Categories functionality
+        const showMoreBtn = document.getElementById('show-more-btn');
+        const categoriesModal = document.getElementById('categories-modal');
+        const closeModal = document.getElementById('close-modal');
+
+        if (showMoreBtn) {
+            showMoreBtn.addEventListener('click', function() {
+                categoriesModal.classList.remove('hidden');
+            });
+        }
+
+        if (closeModal) {
+            closeModal.addEventListener('click', function() {
+                categoriesModal.classList.add('hidden');
+            });
+        }
+
+        // Close modal when clicking outside
+        if (categoriesModal) {
+            categoriesModal.addEventListener('click', function(e) {
+                if (e.target === categoriesModal) {
+                    categoriesModal.classList.add('hidden');
                 }
             });
         }
