@@ -11,11 +11,11 @@ packages = ["lsof"]
 language = "python3"
 
 [deployment]
-run = ["sh", "-c", "cd homeway && python manage.py runserver 0.0.0.0:5000"]
+run = ["sh", "-c", "cd homeway && python manage.py runserver 0.0.0.0:8000"]
 deploymentTarget = "gce"
 
 [[ports]]
-localPort = 5000
+localPort = 8000
 externalPort = 80
 
 [workflows]
